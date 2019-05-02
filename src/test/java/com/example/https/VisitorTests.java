@@ -20,8 +20,7 @@ class ElementVisitor implements Visitor{
     @Override
     public void visit(Acceptable acceptable) {
 
-        new AcceptableTypeCaster().casting(acceptable, Element.class)
-                .accept(this);
+        new AcceptableTypeCaster().cast(acceptable, Element.class).accept(this);
     }
 }
 
@@ -35,7 +34,7 @@ class Element implements Acceptable{
 class AcceptableTypeCaster{
     private TypeCaster typeCaster = (acceptable, object) -> acceptable;
 
-    public <T> T casting(Acceptable acceptable, Class<T> expectType){
+    public <T> T cast(Acceptable acceptable, Class<T> expectType){
         T result = null;
         try{
             result = (T) typeCaster.apply(acceptable, expectType);
